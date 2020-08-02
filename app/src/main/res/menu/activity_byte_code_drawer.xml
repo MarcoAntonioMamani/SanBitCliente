@@ -10,12 +10,17 @@
             android:visible="false"/>
         <item
             android:id="@+id/item_navigation_drawer_pedidos"
-            android:title="Mi Carrito"
-            android:icon="@drawable/ic_order"
+            android:title="Ver Productos"
+            android:icon="@drawable/ic_productoo"
             android:visible="true"/>
         <item
             android:id="@+id/item_navigation_drawer_entregados"
-            android:title="Pedidos Realizados"
+            android:title="Ver Personal"
+            android:icon="@drawable/perfil"
+            android:visible="true"/>
+        <item
+            android:id="@+id/item_Ventas"
+            android:title="Ventas Entregadas"
             android:icon="@drawable/order"
             android:visible="true"/>
         <item
@@ -23,12 +28,7 @@
             android:title="Sincronizar"
             android:icon="@drawable/ic_sincroniza"
             android:visible="true"/>
-        <item
-            android:checked="true"
-            android:id="@+id/item_navigation_drawer_sincronizar"
-            android:icon="@drawable/company"
-            android:title="Acerca de la Empresa"
-            android:visible="false"/>
+
 
 
     </group>

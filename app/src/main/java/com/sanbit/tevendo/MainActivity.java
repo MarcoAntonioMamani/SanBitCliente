@@ -96,11 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 // String roles  = UserPrefs.getInstance(getApplicationContext()).getRoles();
 
                 switch (item.getItemId()) {
-                    case R.id.item_navigation_drawer_sincronizar:
-                        item.setChecked(true);
-                        setFragment(1);
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        return true;
+
                     case R.id.item_cliente:
 
                         item.setChecked(true);
@@ -226,12 +222,11 @@ public class MainActivity extends AppCompatActivity {
         userNameView.setText("Bienvenido : Usuario Invitado");
         userEmailView.setText("Telf: 78140596");
 
-        MenuItem menulcv = navigationView.getMenu().findItem(R.id.item_navigation_drawer_sincronizar);
         menucli= navigationView.getMenu().findItem(R.id.item_cliente);
         MenuItem menuped = navigationView.getMenu().findItem(R.id.item_navigation_drawer_pedidos);
         MenuItem menuMapa = navigationView.getMenu().findItem(R.id.item_sincronizar);
         MenuItem menupedEntregados = navigationView.getMenu().findItem(R.id.item_navigation_drawer_entregados);
-        menulcv.setVisible(true);
+
         menucli.setVisible(true);
         menuped.setVisible(true);
         menuMapa.setVisible(true);
