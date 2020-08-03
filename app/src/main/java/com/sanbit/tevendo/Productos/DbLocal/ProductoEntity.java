@@ -20,19 +20,22 @@ public class ProductoEntity implements Cloneable {
     int categoriaId;
     @ColumnInfo(name = "nameCategoria")
     String nameCategoria;
-    @ColumnInfo(name = "precio")
-    double precio;
+    @ColumnInfo(name = "precioCosto")
+    double precioCosto;
+    @ColumnInfo(name = "precioVenta")
+    double precioVenta;
     @ColumnInfo(name = "stock")
     double stock;
 
-    public ProductoEntity(int id, String codigo, String nameProducto, String descripcionCorta, int categoriaId, String nameCategoria, double precio, double stock) {
+    public ProductoEntity(int id, String codigo, String nameProducto, String descripcionCorta, int categoriaId, String nameCategoria, double precioCosto, double precioVenta, double stock) {
         this.id = id;
         this.codigo = codigo;
         this.nameProducto = nameProducto;
         this.descripcionCorta = descripcionCorta;
         this.categoriaId = categoriaId;
         this.nameCategoria = nameCategoria;
-        this.precio = precio;
+        this.precioCosto = precioCosto;
+        this.precioVenta = precioVenta;
         this.stock = stock;
     }
 
@@ -84,12 +87,20 @@ public class ProductoEntity implements Cloneable {
         this.nameCategoria = nameCategoria;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrecioCosto() {
+        return precioCosto;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecioCosto(double precioCosto) {
+        this.precioCosto = precioCosto;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
     public double getStock() {

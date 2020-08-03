@@ -26,8 +26,8 @@ public class ClienteEntity implements Comparable<ClienteEntity> {
     Double latitud;
     @ColumnInfo(name = "longitud")
     Double longitud;
-    @ColumnInfo(name = "fechaingreso")
-    Date fechaingreso;
+    @ColumnInfo(name = "ultimaVenta")
+    Date ultimaVenta;
     @ColumnInfo(name = "estado")
     int estado;
     @ColumnInfo(name = "codigogenerado")
@@ -125,12 +125,12 @@ public class ClienteEntity implements Comparable<ClienteEntity> {
         this.longitud = longitud;
     }
 
-    public Date getFechaingreso() {
-        return fechaingreso;
+    public Date getUltimaVenta() {
+        return ultimaVenta;
     }
 
-    public void setFechaingreso(Date fechaingreso) {
-        this.fechaingreso = fechaingreso;
+    public void setUltimaVenta(Date ultimaVenta) {
+        this.ultimaVenta = ultimaVenta;
     }
 
     public int getEstado() {
