@@ -18,14 +18,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface IUsersApi {
-    @POST("/api/repartidor/login")
-    Call<ResponseLogin> LoginUser(@Body Bodylogin user);
 
-    @POST("/api/repartidor/clients/{idrepartidor}")
-    Call<ResponseLogin> InsertUser(@Body ClienteEntity user, @Path("idrepartidor") String idRepartidor);
-
-    @PUT("/api/repartidor/clients")
-    Call<ResponseLogin> UpdateUser(@Body ClienteEntity user);
 
     @GET("/api/sanbit/clientes")
     Call<List<ClienteEntity>> ObtenerClientes();
@@ -34,14 +27,24 @@ public interface IUsersApi {
 
     @GET("/api/sanbit/productos")
     Call<List<ProductoEntity>> ObtenerProductos();
-    @GET("/api/repartidor/pedidos")
+    @GET("/api/sanbit/pedidos")
     Call<List<PedidoEntity>> ObtenerPedidos();
-    @GET("/api/repartidor/detalles")
+    @GET("/api/sanbit/detalles")
     Call<List<DetalleEntity>> ObtenerDetalles();
+
 
     @GET("/api/sanbit/stock")
     Call<List<StockEntity>> ObtenerStocks();
 
+
+    @POST("/api/repartidor/login")
+    Call<ResponseLogin> LoginUser(@Body Bodylogin user);
+
+    @POST("/api/repartidor/clients/{idrepartidor}")
+    Call<ResponseLogin> InsertUser(@Body ClienteEntity user, @Path("idrepartidor") String idRepartidor);
+
+    @PUT("/api/repartidor/clients")
+    Call<ResponseLogin> UpdateUser(@Body ClienteEntity user);
     @POST("/api/repartidor/pedido")
     Call<ResponseLogin> InsertPedido(@Body PedidoEntity user);
 

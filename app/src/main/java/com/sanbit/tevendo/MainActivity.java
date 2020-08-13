@@ -32,8 +32,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sanbit.tevendo.Clientes.ClientesFragment;
 import com.sanbit.tevendo.ShareUtil.DataCache;
 import com.sanbit.tevendo.ShareUtil.LocationGeo;
+import com.sanbit.tevendo.Sincronizar.SincronizarFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                     case R.id.item_sincronizar:
-                        setFragment(5);
+                        setFragment(1);
                         item.setChecked(true);
                         //setFragment(2);
                         drawerLayout.closeDrawer(GravityCompat.START);
@@ -141,13 +143,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 returnToMain();
-               /* frag = new SincronizarFragment();
-                tag = Constantes.TAG_SINCRONIZACION;*/
+                frag = new SincronizarFragment();
+                tag = Constantes.TAG_SINCRONIZACION;
                 break;
             case 2:
                 returnToMain();
-               /* frag = new EmpresasFragment();
-                tag = "Empresas";*/
+                frag = new ClientesFragment();
+                tag = "Clientes";
                 break;
             case 3:
                 returnToMain();

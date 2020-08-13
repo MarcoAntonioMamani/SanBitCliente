@@ -32,6 +32,7 @@ import com.sanbit.tevendo.Clientes.DbLocal.Precios.PreciosListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockListViewModel;
 import com.sanbit.tevendo.Productos.DbLocal.ProductosListViewModel;
 import com.sanbit.tevendo.R;
+import com.sanbit.tevendo.ShareUtil.DataCache;
 import com.sanbit.tevendo.ShareUtil.LocationGeo;
 
 import org.jetbrains.annotations.NotNull;
@@ -61,18 +62,19 @@ public class SincronizarFragment extends Fragment implements SincronizarMvp.View
         super.onActivityCreated(savedInstanceState);
         LocationGeo.getInstance(getContext(),getActivity());
         LocationGeo.PedirPermisoApp();
-
+        DataCache.tvTitleMenu.setText("Sincronizar");
     }
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("Sincronizar");
+        DataCache.tvTitleMenu.setText("Sincronizar");
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        DataCache.tvTitleMenu.setText("Sincronizar");
     }
 
     @Override

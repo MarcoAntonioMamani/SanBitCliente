@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8e8027d432e20c6ad7f6223306073efa",
+    "identityHash": "8337deec55f50f6c7d9a5ea1848ed520",
     "entities": [
       {
         "tableName": "clientes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `numi` INTEGER NOT NULL, `codigo` TEXT, `namecliente` TEXT, `nit` TEXT, `direccion` TEXT, `telefono` TEXT, `latitud` REAL, `longitud` REAL, `fechaingreso` INTEGER, `estado` INTEGER NOT NULL, `codigogenerado` TEXT, `cccat` INTEGER NOT NULL, `cczona` INTEGER NOT NULL, `razon_social` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `numi` INTEGER NOT NULL, `codigo` TEXT, `namecliente` TEXT, `nit` TEXT, `direccion` TEXT, `telefono` TEXT, `latitud` REAL, `longitud` REAL, `ultimaVenta` INTEGER, `estado` INTEGER NOT NULL, `codigogenerado` TEXT, `cccat` INTEGER NOT NULL, `cczona` INTEGER NOT NULL, `razon_social` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -63,8 +63,8 @@
             "notNull": false
           },
           {
-            "fieldPath": "fechaingreso",
-            "columnName": "fechaingreso",
+            "fieldPath": "ultimaVenta",
+            "columnName": "ultimaVenta",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -110,7 +110,7 @@
       },
       {
         "tableName": "producto",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `codigo` TEXT, `nameProducto` TEXT, `descripcionCorta` TEXT, `categoriaId` INTEGER NOT NULL, `nameCategoria` TEXT, `precio` REAL NOT NULL, `stock` REAL NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `codigo` TEXT, `nameProducto` TEXT, `descripcionCorta` TEXT, `categoriaId` INTEGER NOT NULL, `nameCategoria` TEXT, `precioCosto` REAL NOT NULL, `precioVenta` REAL NOT NULL, `stock` REAL NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -149,8 +149,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "precio",
-            "columnName": "precio",
+            "fieldPath": "precioCosto",
+            "columnName": "precioCosto",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precioVenta",
+            "columnName": "precioVenta",
             "affinity": "REAL",
             "notNull": true
           },
@@ -489,7 +495,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8e8027d432e20c6ad7f6223306073efa\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8337deec55f50f6c7d9a5ea1848ed520\")"
     ]
   }
 }
