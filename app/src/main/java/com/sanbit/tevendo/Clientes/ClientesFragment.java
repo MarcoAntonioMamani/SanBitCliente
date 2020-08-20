@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.ClientesListViewModel;
+import com.sanbit.tevendo.Clientes.ViewDataCliente.ViewClienteFragment;
 import com.sanbit.tevendo.MainActivity;
 import com.sanbit.tevendo.Mapas.MapaActivity;
 import com.sanbit.tevendo.R;
@@ -178,13 +179,13 @@ public class ClientesFragment extends Fragment  implements SearchView.OnQueryTex
     @Override
     public void recyclerViewListClicked(View v,  ClienteEntity cliente) {
         if (cliente!=null){
-            //UtilShare.cliente=cliente;
+            DataCache.cliente=cliente;
 
-           /* int isUpdate= DataPreferences.getPrefInt("UpdateCliente",getContext());
+           int isUpdate= DataPreferences.getPrefInt("UpdateCliente",getContext());
 
-            Fragment frag = new CreateClienteFragment(1,cliente,isUpdate);
+            Fragment frag = new ViewClienteFragment(1,cliente,isUpdate);
             MainActivity fca = (MainActivity) getActivity();
-            fca.switchFragment(frag,"UpdateClientes");*/
+            fca.switchFragment(frag,"UpdateClientes");
         }
     }
 
