@@ -5,11 +5,14 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.ClientesListViewModel;
 import com.sanbit.tevendo.MainActivity;
+import com.sanbit.tevendo.Mapas.MapaActivity;
 import com.sanbit.tevendo.R;
 import com.sanbit.tevendo.ShareUtil.DataCache;
 import com.sanbit.tevendo.ShareUtil.DataPreferences;
@@ -34,6 +38,8 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.Unbinder;
+
+import static android.Manifest.permission.CALL_PHONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -181,6 +187,51 @@ public class ClientesFragment extends Fragment  implements SearchView.OnQueryTex
             fca.switchFragment(frag,"UpdateClientes");*/
         }
     }
+
+    @Override
+    public void showCellPhone(View v, ClienteEntity i) {
+        if (!i.getTelefono().toString().isEmpty()){
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:"+i.getTelefono().toString()));
+
+            if (ContextCompat.checkSelfPermission(getContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                startActivity(intent);
+            } else {
+                requestPermissions(new String[]{CALL_PHONE}, 1);
+            }
+
+        }else{
+            ShowMessageResult("El Usuario no tiene registrado un numero de telefono");
+        }
+    }
+
+    @Override
+    public void sendMessageWhatsapp(View v, ClienteEntity i) {
+        if (!i.getTelefono().toString() .isEmpty()){
+            String url="https://api.whatsapp.com/send?phone=591"+i.getTelefono()+"&text= ";
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void viewUbicacion(View v, ClienteEntity i) {
+        if (i!=null){
+
+            if (i.getLatitud()==0 || i.getLongitud()==0){
+                ShowMessageResult("El cliente no tiene ubicacion registrada");
+            }else{
+                DataCache.cliente=i;
+                MainActivity fca = ((MainActivity) getActivity());
+                fca.startActivity(new Intent(getActivity(), MapaActivity.class));
+                fca.overridePendingTransition(R.transition.left_in, R.transition.left_out);
+            }
+        }else{
+            ShowMessageResult("La tienda no tiene Registrado Ubicacion");
+        }
+    }
+
     public void ShowMessageResult(String message) {
         Snackbar snackbar= Snackbar.make(recList, message, Snackbar.LENGTH_LONG);
         View snackbar_view=snackbar.getView();

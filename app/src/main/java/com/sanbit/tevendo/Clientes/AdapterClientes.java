@@ -88,7 +88,24 @@ private ClienteMvp.View mview;
             }
 
         }
-
+        clientesViewHolder.linearLlamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mview.showCellPhone(v, listaCliente.get(i));
+            }
+        });
+        clientesViewHolder.linearWhatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mview.sendMessageWhatsapp(v,listaCliente.get(i));
+            }
+        });
+        clientesViewHolder.linearUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mview.viewUbicacion(v,listaCliente.get(i));
+            }
+        });
     }
 
     @Override
