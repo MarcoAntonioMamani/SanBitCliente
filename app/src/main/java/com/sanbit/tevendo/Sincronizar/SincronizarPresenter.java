@@ -5,6 +5,8 @@ import android.content.Context;
 
 
 import com.google.android.gms.common.internal.Preconditions;
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.ClientesListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoEntity;
@@ -36,6 +38,7 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
     private final PedidoListViewModel viewModelPedidos;
     private final DetalleListViewModel viewModelDetalles;
     private final StockListViewModel viewModelStock;
+    private final CategoriaListViewModel viewModelCategoria;
     private final Activity activity;
      int cantidadCliente = 0;
     int cantidadProducto=0;
@@ -48,7 +51,7 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
 
     public SincronizarPresenter(SincronizarMvp.View sincronizarView, Context context, ClientesListViewModel viewModel, Activity activity, PreciosListViewModel
                                 viewModelPrecios, ProductosListViewModel viewModelProductos, PedidoListViewModel viewModelPedidos,
-                                DetalleListViewModel viewModelDetalles, StockListViewModel stock){
+                                DetalleListViewModel viewModelDetalles, StockListViewModel stock,CategoriaListViewModel cate){
         mSincronizarview = Preconditions.checkNotNull(sincronizarView);
         mSincronizarview.setPresenter(this);
         this.viewModel=viewModel;
@@ -59,6 +62,7 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
         this.viewModelPedidos=viewModelPedidos;
         this.viewModelDetalles=viewModelDetalles;
         this.viewModelStock=stock;
+        this.viewModelCategoria=cate;
          cantidadCliente = 0;
        cantidadProducto=0;
          cantidadPrecio=0;
@@ -237,7 +241,7 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
         });
     }
     public void _DecargarProductos(){
-
+        _DescargarCategoria();
         ApiManager apiManager=ApiManager.getInstance(mContext);
         apiManager.ObtenerProductos( new Callback<List<ProductoEntity>>() {
             @Override
@@ -309,6 +313,8 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
     }
 
     public void _DescargarStock(){
+
+
         ApiManager apiManager=ApiManager.getInstance(mContext);
         apiManager.ObtenerStock(new Callback<List<StockEntity>>() {
             @Override
@@ -353,6 +359,40 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
 
             @Override
             public void onFailure(Call<List<StockEntity>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void _DescargarCategoria(){
+        ApiManager apiManager=ApiManager.getInstance(mContext);
+        apiManager.ObtenerCategorias(new Callback<List<CategoriaEntity>>() {
+            @Override
+            public void onResponse(Call<List<CategoriaEntity>> call, Response<List<CategoriaEntity>> response) {
+                final List<CategoriaEntity> responseUser = (List<CategoriaEntity>) response.body();
+                if (response.code() == 404) {
+                    // mSincronizarview.ShowMessageResult("No es posible conectarse con el servicio. "+ response.message());
+                    return;
+                }
+                if (response.isSuccessful() && responseUser != null) {
+
+                        viewModelCategoria.deleteAllCategorias();
+                        for (int i = 0; i < responseUser.size(); i++) {
+                            CategoriaEntity stock = responseUser.get(i);  //Obtenemos el registro del server
+                            viewModelCategoria.insertCategorias(stock);
+
+
+
+                        }
+
+
+                } else {
+                    // mSincronizarview.ShowMessageResult("No se pudo Obtener Datos del Servidor para Productos");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CategoriaEntity>> call, Throwable t) {
 
             }
         });

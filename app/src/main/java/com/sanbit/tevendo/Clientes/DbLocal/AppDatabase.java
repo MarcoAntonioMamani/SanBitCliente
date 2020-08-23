@@ -6,6 +6,8 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaDao;
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoDao;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleDao;
@@ -25,7 +27,7 @@ import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
  */
 
 @Database(entities = { ClienteEntity.class, ProductoEntity .class, UserEntity.class, PrecioEntity.class, StockEntity.class,
-        PedidoEntity.class, DetalleEntity.class}, version = 1)
+        PedidoEntity.class, DetalleEntity.class, CategoriaEntity.class}, version = 1)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -37,6 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public  abstract StockDao stockDao();
     public abstract PedidoDao pedidoDao();
     public abstract DetalleDao detalleDao();
+    public abstract CategoriaDao categoriaDao();
     public static AppDatabase INSTANCE;
 
    public  static AppDatabase getDatabase(final Context context) {

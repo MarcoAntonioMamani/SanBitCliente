@@ -1,6 +1,7 @@
 package com.sanbit.tevendo.Sincronizar.Cloud;
 
 
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleEntity;
@@ -31,7 +32,8 @@ public interface IUsersApi {
     Call<List<PedidoEntity>> ObtenerPedidos();
     @GET("/api/sanbit/detalles")
     Call<List<DetalleEntity>> ObtenerDetalles();
-
+    @GET("/api/sanbit/categorias")
+    Call<List<CategoriaEntity>> ObtenerCategorias();
 
     @GET("/api/sanbit/stock")
     Call<List<StockEntity>> ObtenerStocks();

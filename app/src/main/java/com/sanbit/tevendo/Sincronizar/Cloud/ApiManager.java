@@ -2,6 +2,7 @@ package com.sanbit.tevendo.Sincronizar.Cloud;
 
 import android.content.Context;
 
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleEntity;
@@ -92,6 +93,10 @@ private static Context mcontext;
     }
     public void ObtenerProductos( Callback<List<ProductoEntity>> callback) {
         Call<List<ProductoEntity>> userCall = service.ObtenerProductos();
+        userCall.enqueue(callback);
+    }
+    public void ObtenerCategorias( Callback<List<CategoriaEntity>> callback) {
+        Call<List<CategoriaEntity>> userCall = service.ObtenerCategorias();
         userCall.enqueue(callback);
     }
     public void ObtenerPedidos(Callback<List<PedidoEntity>> callback) {
