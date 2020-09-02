@@ -4,9 +4,10 @@ package com.sanbit.tevendo.Productos.DbLocal;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "producto")
-public class ProductoEntity implements Cloneable {
+public class ProductoEntity implements Cloneable, Comparable<ProductoEntity> {
     @PrimaryKey()
     @ColumnInfo(name = "id")
     int id;
@@ -26,8 +27,14 @@ public class ProductoEntity implements Cloneable {
     double precioVenta;
     @ColumnInfo(name = "stock")
     double stock;
+    @ColumnInfo(name = "ImageProducto")
+    String ImageProducto;
+    @ColumnInfo(name = "StockMinimo")
+    int StockMinimo;
+    public ProductoEntity() {
+    }
 
-    public ProductoEntity(int id, String codigo, String nameProducto, String descripcionCorta, int categoriaId, String nameCategoria, double precioCosto, double precioVenta, double stock) {
+    public ProductoEntity(int id, String codigo, String nameProducto, String descripcionCorta, int categoriaId, String nameCategoria, double precioCosto, double precioVenta, double stock, String imageProducto, int stockMinimo) {
         this.id = id;
         this.codigo = codigo;
         this.nameProducto = nameProducto;
@@ -37,6 +44,8 @@ public class ProductoEntity implements Cloneable {
         this.precioCosto = precioCosto;
         this.precioVenta = precioVenta;
         this.stock = stock;
+        ImageProducto = imageProducto;
+        StockMinimo = stockMinimo;
     }
 
     public int getId() {
@@ -111,7 +120,29 @@ public class ProductoEntity implements Cloneable {
         this.stock = stock;
     }
 
+    public String getImageProducto() {
+        return ImageProducto;
+    }
+
+    public void setImageProducto(String imageProducto) {
+        ImageProducto = imageProducto;
+    }
+
+    public int getStockMinimo() {
+        return StockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        StockMinimo = stockMinimo;
+    }
+
     public ProductoEntity clone() throws CloneNotSupportedException {
         return (ProductoEntity) super.clone();
+    }
+    @Override
+    public int compareTo(@NonNull ProductoEntity o) {
+        String a=new String(String.valueOf(this.getNameProducto()));
+        String b=new String(String.valueOf(o.getNameProducto()));
+        return a.compareTo(b);
     }
 }

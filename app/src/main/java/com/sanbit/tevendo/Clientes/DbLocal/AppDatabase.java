@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaDao;
 import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
@@ -14,6 +15,8 @@ import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleDao;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PrecioDao;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PrecioEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesDao;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockDao;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.User.UserDao;
@@ -27,7 +30,7 @@ import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
  */
 
 @Database(entities = { ClienteEntity.class, ProductoEntity .class, UserEntity.class, PrecioEntity.class, StockEntity.class,
-        PedidoEntity.class, DetalleEntity.class, CategoriaEntity.class}, version = 1)
+        PedidoEntity.class, DetalleEntity.class, CategoriaEntity.class, ProductosImagenesEntity.class}, version = 4)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -40,6 +43,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PedidoDao pedidoDao();
     public abstract DetalleDao detalleDao();
     public abstract CategoriaDao categoriaDao();
+    public abstract ProductosImagenesDao imagenesDao();
     public static AppDatabase INSTANCE;
 
    public  static AppDatabase getDatabase(final Context context) {
@@ -48,6 +52,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "TeVendo_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

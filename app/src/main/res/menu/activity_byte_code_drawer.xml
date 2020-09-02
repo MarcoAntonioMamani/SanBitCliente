@@ -9,7 +9,7 @@
             android:title="Ver Clientes"
             android:visible="false"/>
         <item
-            android:id="@+id/item_navigation_drawer_pedidos"
+            android:id="@+id/item_navigation_drawer_productos"
             android:title="Ver Productos"
             android:icon="@drawable/ic_productoo"
             android:visible="true"/>

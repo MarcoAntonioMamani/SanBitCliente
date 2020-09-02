@@ -7,6 +7,7 @@ import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PrecioEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockEntity;
 import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
 import com.sanbit.tevendo.Sincronizar.DataPreferences;
@@ -26,7 +27,7 @@ private static Context mcontext;
     private ApiManager(Context context) {
         String Url="";
         if (DataPreferences.getPref("servicio",context)==null){
-           Url="http://192.168.0.12:3050";
+           Url="http://192.168.0.4:3050";
         }else{
             Url=DataPreferences.getPref("servicio",context);
         }
@@ -97,6 +98,10 @@ private static Context mcontext;
     }
     public void ObtenerCategorias( Callback<List<CategoriaEntity>> callback) {
         Call<List<CategoriaEntity>> userCall = service.ObtenerCategorias();
+        userCall.enqueue(callback);
+    }
+    public void ObtenerImagenes( Callback<List<ProductosImagenesEntity>> callback) {
+        Call<List<ProductosImagenesEntity>> userCall = service.ObtenerImagenes();
         userCall.enqueue(callback);
     }
     public void ObtenerPedidos(Callback<List<PedidoEntity>> callback) {

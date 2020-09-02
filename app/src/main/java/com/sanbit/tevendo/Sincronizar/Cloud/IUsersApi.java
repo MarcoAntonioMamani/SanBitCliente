@@ -6,6 +6,7 @@ import com.sanbit.tevendo.Clientes.DbLocal.ClienteEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PrecioEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockEntity;
 import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
 
@@ -34,6 +35,9 @@ public interface IUsersApi {
     Call<List<DetalleEntity>> ObtenerDetalles();
     @GET("/api/sanbit/categorias")
     Call<List<CategoriaEntity>> ObtenerCategorias();
+
+    @GET("/api/sanbit/productosImagenes")
+    Call<List<ProductosImagenesEntity>> ObtenerImagenes();
 
     @GET("/api/sanbit/stock")
     Call<List<StockEntity>> ObtenerStocks();

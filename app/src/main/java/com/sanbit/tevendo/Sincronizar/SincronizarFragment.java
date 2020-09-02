@@ -25,10 +25,12 @@ import com.google.common.base.Preconditions;
 import com.labters.lottiealertdialoglibrary.ClickListener;
 import com.labters.lottiealertdialoglibrary.DialogTypes;
 import com.labters.lottiealertdialoglibrary.LottieAlertDialog;
+import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.ClientesListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Pedido.PedidoListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PreciosListViewModel;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockListViewModel;
 import com.sanbit.tevendo.Productos.DbLocal.ProductosListViewModel;
 import com.sanbit.tevendo.R;
@@ -49,9 +51,11 @@ public class SincronizarFragment extends Fragment implements SincronizarMvp.View
     private ClientesListViewModel viewModel;
     private PreciosListViewModel viewModelPrecio;
     private ProductosListViewModel viewModelProducto;
+    private ProductosImagenesListViewModel viewModelImagenes;
     private PedidoListViewModel viewModelPedidos;
     private DetalleListViewModel viewModelDetalle;
     private StockListViewModel viewModelStock;
+    private CategoriaListViewModel viewModelCategoria;
     LottieAlertDialog alertDialog;
     public SincronizarFragment() {
         // Required empty public constructor
@@ -94,9 +98,11 @@ public class SincronizarFragment extends Fragment implements SincronizarMvp.View
         viewModelPedidos = ViewModelProviders.of(getActivity()).get(PedidoListViewModel.class);
         viewModelDetalle = ViewModelProviders.of(getActivity()).get(DetalleListViewModel.class);
         viewModelStock=ViewModelProviders.of(getActivity()).get(StockListViewModel.class);
+        viewModelCategoria=ViewModelProviders.of(getActivity()).get(CategoriaListViewModel.class);
+        viewModelImagenes=ViewModelProviders.of(getActivity()).get(ProductosImagenesListViewModel.class);
       /*  NoteEntity note = new NoteEntity(inputNote.getText().toString());
         viewModel.insertNote(note);*/
-        new SincronizarPresenter(this,getContext(),viewModel,getActivity(),viewModelPrecio,viewModelProducto,viewModelPedidos,viewModelDetalle,viewModelStock);
+        new SincronizarPresenter(this,getContext(),viewModel,getActivity(),viewModelPrecio,viewModelProducto,viewModelPedidos,viewModelDetalle,viewModelStock,viewModelCategoria,viewModelImagenes);
         checkTodo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

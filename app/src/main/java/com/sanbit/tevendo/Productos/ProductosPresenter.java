@@ -6,6 +6,8 @@ import com.google.android.gms.common.internal.Preconditions;
 import com.google.gson.Gson;
 import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaListViewModel;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesListViewModel;
 import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
 import com.sanbit.tevendo.Productos.DbLocal.ProductosListViewModel;
 
@@ -23,18 +25,20 @@ public class ProductosPresenter  implements ProductorMvp.Presenter{
     private final ProductorMvp.View mSincronizarProductos;
     private final ProductosListViewModel viewModelProducto;
     private final CategoriaListViewModel  viewModelCategoria;
-
+    private final ProductosImagenesListViewModel viewModelImagenes;
     private final Context mContext;
 
 
  int contador=0;
-    public ProductosPresenter(ProductorMvp.View Sincronizarview, Context context,ProductosListViewModel mproducto,CategoriaListViewModel  mcategoria) {
+    public ProductosPresenter(ProductorMvp.View Sincronizarview, Context context,ProductosListViewModel mproducto,CategoriaListViewModel  mcategoria,
+                              ProductosImagenesListViewModel mImagenes) {
 
         this.viewModelProducto=mproducto;
         this.mContext=context;
         this.viewModelCategoria=mcategoria;
         mSincronizarProductos = Preconditions.checkNotNull(Sincronizarview);
         mSincronizarProductos.setPresenter(this);
+        this.viewModelImagenes=mImagenes;
     }
 
     @Override
@@ -43,7 +47,8 @@ public class ProductosPresenter  implements ProductorMvp.Presenter{
         try {
           List<ProductoEntity>  listProducto=  viewModelProducto.getMAllProducto(1);
           List<CategoriaEntity> listCategoria=viewModelCategoria.getMAllCategorias(1);
-            mSincronizarProductos.MostrarDatos(listProducto,listCategoria);
+          List<ProductosImagenesEntity> listImagenes=viewModelImagenes.getMAllImagenes(1);
+            mSincronizarProductos.MostrarDatos(listProducto,listCategoria,listImagenes);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

@@ -15,6 +15,8 @@ import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.PedidoDetalle.DetalleListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PrecioEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Precios.PreciosListViewModel;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesListViewModel;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockEntity;
 import com.sanbit.tevendo.Clientes.DbLocal.Stock.StockListViewModel;
 import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
@@ -39,6 +41,8 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
     private final DetalleListViewModel viewModelDetalles;
     private final StockListViewModel viewModelStock;
     private final CategoriaListViewModel viewModelCategoria;
+    private final ProductosImagenesListViewModel viewModelImagenes;
+
     private final Activity activity;
      int cantidadCliente = 0;
     int cantidadProducto=0;
@@ -51,7 +55,8 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
 
     public SincronizarPresenter(SincronizarMvp.View sincronizarView, Context context, ClientesListViewModel viewModel, Activity activity, PreciosListViewModel
                                 viewModelPrecios, ProductosListViewModel viewModelProductos, PedidoListViewModel viewModelPedidos,
-                                DetalleListViewModel viewModelDetalles, StockListViewModel stock,CategoriaListViewModel cate){
+                                DetalleListViewModel viewModelDetalles, StockListViewModel stock,CategoriaListViewModel cate,
+                                ProductosImagenesListViewModel imagenes){
         mSincronizarview = Preconditions.checkNotNull(sincronizarView);
         mSincronizarview.setPresenter(this);
         this.viewModel=viewModel;
@@ -63,6 +68,7 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
         this.viewModelDetalles=viewModelDetalles;
         this.viewModelStock=stock;
         this.viewModelCategoria=cate;
+        this.viewModelImagenes=imagenes;
          cantidadCliente = 0;
        cantidadProducto=0;
          cantidadPrecio=0;
@@ -242,6 +248,7 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
     }
     public void _DecargarProductos(){
         _DescargarCategoria();
+        _DescargarImagenes();
         ApiManager apiManager=ApiManager.getInstance(mContext);
         apiManager.ObtenerProductos( new Callback<List<ProductoEntity>>() {
             @Override
@@ -541,7 +548,39 @@ public class SincronizarPresenter implements SincronizarMvp.Presenter {
             }
         });
     }
+    public void _DescargarImagenes(){
+        ApiManager apiManager=ApiManager.getInstance(mContext);
+        apiManager.ObtenerImagenes(new Callback<List<ProductosImagenesEntity>>() {
+            @Override
+            public void onResponse(Call<List<ProductosImagenesEntity>> call, Response<List<ProductosImagenesEntity>> response) {
+                final List<ProductosImagenesEntity> responseUser = (List<ProductosImagenesEntity>) response.body();
+                if (response.code() == 404) {
+                    // mSincronizarview.ShowMessageResult("No es posible conectarse con el servicio. "+ response.message());
+                    return;
+                }
+                if (response.isSuccessful() && responseUser != null) {
 
+                    viewModelImagenes.deleteAllImagenes();
+                    for (int i = 0; i < responseUser.size(); i++) {
+                        ProductosImagenesEntity stock = responseUser.get(i);  //Obtenemos el registro del server
+                        viewModelImagenes.insertImagenes(stock);
+
+
+
+                    }
+
+
+                } else {
+                    // mSincronizarview.ShowMessageResult("No se pudo Obtener Datos del Servidor para Productos");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductosImagenesEntity>> call, Throwable t) {
+
+            }
+        });
+    }
     public String getMensaje() {
         return Mensaje;
     }

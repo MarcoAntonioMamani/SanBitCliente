@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "0df51108d83ea3af613e450ae3e0d470",
+    "version": 4,
+    "identityHash": "48f9402d2615f036d2046cf56f794493",
     "entities": [
       {
         "tableName": "clientes",
@@ -110,7 +110,7 @@
       },
       {
         "tableName": "producto",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `codigo` TEXT, `nameProducto` TEXT, `descripcionCorta` TEXT, `categoriaId` INTEGER NOT NULL, `nameCategoria` TEXT, `precioCosto` REAL NOT NULL, `precioVenta` REAL NOT NULL, `stock` REAL NOT NULL, `ImageProducto` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `codigo` TEXT, `nameProducto` TEXT, `descripcionCorta` TEXT, `categoriaId` INTEGER NOT NULL, `nameCategoria` TEXT, `precioCosto` REAL NOT NULL, `precioVenta` REAL NOT NULL, `stock` REAL NOT NULL, `ImageProducto` TEXT, `StockMinimo` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -171,6 +171,12 @@
             "columnName": "ImageProducto",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "StockMinimo",
+            "columnName": "StockMinimo",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -538,11 +544,11 @@
       },
       {
         "tableName": "imagenes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Id` INTEGER NOT NULL, `ProductoId` INTEGER NOT NULL, `NombreImage` TEXT, PRIMARY KEY(`Id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `ProductoId` INTEGER NOT NULL, `NombreImage` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
-            "fieldPath": "Id",
-            "columnName": "Id",
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -561,7 +567,7 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "Id"
+            "id"
           ],
           "autoGenerate": false
         },
@@ -571,7 +577,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0df51108d83ea3af613e450ae3e0d470\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"48f9402d2615f036d2046cf56f794493\")"
     ]
   }
 }

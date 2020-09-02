@@ -136,6 +136,7 @@
                         android:textStyle="bold"
                         android:textSize="11dp"
                         android:paddingLeft="8dp"
+                        android:id="@+id/producto_precioventa"
                         />
                 </LinearLayout>
             </LinearLayout>

@@ -5,6 +5,8 @@ import android.widget.TextView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 
 import com.sanbit.tevendo.Clientes.DbLocal.Categoria.CategoriaEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesEntity;
+import com.sanbit.tevendo.Clientes.DbLocal.ProductosImagenes.ProductosImagenesListViewModel;
 import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public interface ProductorMvp {
         void recyclerViewListClickedCategoria(android.view.View v, CategoriaEntity empresa, TextView tvCategoria);
         void setPresenter(ProductorMvp.Presenter presenter);
         void ShowMessageResult(String message);
-        void MostrarDatos(List<ProductoEntity> listProducto,List<CategoriaEntity>  listCategoria);
+        void MostrarDatos(List<ProductoEntity> listProducto, List<CategoriaEntity>  listCategoria, List<ProductosImagenesEntity> listImagenes);
         void AddCantidadProducto(ElegantNumberButton v, int valor, ProductoEntity producto);
         void ShowSyncroMgs(String message);
 

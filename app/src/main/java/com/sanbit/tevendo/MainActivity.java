@@ -33,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sanbit.tevendo.Clientes.ClientesFragment;
+import com.sanbit.tevendo.Productos.Estados.ProductosEstadosFragment;
+import com.sanbit.tevendo.Productos.ProductosFragment;
 import com.sanbit.tevendo.ShareUtil.DataCache;
 import com.sanbit.tevendo.ShareUtil.LocationGeo;
 import com.sanbit.tevendo.Sincronizar.SincronizarFragment;
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(2);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
-                    case R.id.item_navigation_drawer_pedidos:
+                    case R.id.item_navigation_drawer_productos:
                         setFragment(3);
                         item.setChecked(true);
                         //setFragment(2);
@@ -153,8 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 3:
                 returnToMain();
-                /*frag = new ListPedidosFragment(1);
-                tag = Constantes.TAG_PEDIDOS;*/
+                frag = new ProductosEstadosFragment();
+                tag = Constantes.TAG_SINCRONIZACION;
                 break;
             case 4:
                 returnToMain();
@@ -225,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
         userEmailView.setText("Telf: 78140596");
 
         menucli= navigationView.getMenu().findItem(R.id.item_cliente);
-        MenuItem menuped = navigationView.getMenu().findItem(R.id.item_navigation_drawer_pedidos);
+        MenuItem menuped = navigationView.getMenu().findItem(R.id.item_navigation_drawer_productos);
         MenuItem menuMapa = navigationView.getMenu().findItem(R.id.item_sincronizar);
         MenuItem menupedEntregados = navigationView.getMenu().findItem(R.id.item_navigation_drawer_entregados);
 

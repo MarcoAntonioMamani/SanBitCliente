@@ -3,10 +3,11 @@ package com.sanbit.tevendo.Clientes.DbLocal.Categoria;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "categoria")
-public class CategoriaEntity {
+public class CategoriaEntity implements Cloneable  {
 
     @PrimaryKey()
     @ColumnInfo(name = "Id")
@@ -18,11 +19,26 @@ public class CategoriaEntity {
     @ColumnInfo(name = "imagen")
     String imagen;
 
-    public CategoriaEntity(int id, String nombreCategoria, String descripcionCategoria, String imagen) {
+    @Ignore
+    int Estado;
+
+    public CategoriaEntity() {
+    }
+
+    public CategoriaEntity(int id, String nombreCategoria, String descripcionCategoria, String imagen, int estado) {
         Id = id;
         this.nombreCategoria = nombreCategoria;
         this.descripcionCategoria = descripcionCategoria;
         this.imagen = imagen;
+        Estado = estado;
+    }
+
+    public int getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(int estado) {
+        Estado = estado;
     }
 
     public int getId() {
@@ -55,5 +71,9 @@ public class CategoriaEntity {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public CategoriaEntity clone() throws CloneNotSupportedException {
+        return (CategoriaEntity) super.clone();
     }
 }
