@@ -42,11 +42,29 @@ public class PedidoEntity implements Comparable<PedidoEntity> {
     String codigogenerado;
     @ColumnInfo(name = "estadoupdate")
     int estadoUpdate;
-
-    
+    @ColumnInfo(name = "TipoVenta")
+    int TipoVenta;
+    @ColumnInfo(name = "Utilidad")
+    Double Utilidad;
 public PedidoEntity(){
 
 }
+
+    public int getTipoVenta() {
+        return TipoVenta;
+    }
+
+    public void setTipoVenta(int tipoVenta) {
+        TipoVenta = tipoVenta;
+    }
+
+    public Double getUtilidad() {
+        return Utilidad;
+    }
+
+    public void setUtilidad(Double utilidad) {
+        Utilidad = utilidad;
+    }
 
     public int getId() {
         return id;

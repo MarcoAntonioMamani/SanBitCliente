@@ -30,7 +30,7 @@ import com.sanbit.tevendo.Productos.DbLocal.ProductoEntity;
  */
 
 @Database(entities = { ClienteEntity.class, ProductoEntity .class, UserEntity.class, PrecioEntity.class, StockEntity.class,
-        PedidoEntity.class, DetalleEntity.class, CategoriaEntity.class, ProductosImagenesEntity.class}, version = 4)
+        PedidoEntity.class, DetalleEntity.class, CategoriaEntity.class, ProductosImagenesEntity.class}, version = 5)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 

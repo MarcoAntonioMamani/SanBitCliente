@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sanbit.tevendo.Clientes.ClientesFragment;
+import com.sanbit.tevendo.ListadoVentas.ListadoVentasFragment;
 import com.sanbit.tevendo.Productos.Estados.ProductosEstadosFragment;
 import com.sanbit.tevendo.Productos.ProductosFragment;
 import com.sanbit.tevendo.ShareUtil.DataCache;
@@ -119,6 +120,13 @@ public class MainActivity extends AppCompatActivity {
                         //setFragment(2);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
+
+                    case R.id.item_Ventas:
+                        setFragment(5);
+                        item.setChecked(true);
+                        //setFragment(2);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
                     case R.id.item_sincronizar:
                         setFragment(1);
                         item.setChecked(true);
@@ -163,7 +171,11 @@ public class MainActivity extends AppCompatActivity {
                 /*frag = new ListPedidosFragment(3);
                 tag = Constantes.TAG_PEDIDOS;*/
                 break;
-
+            case 5:
+                returnToMain();
+                frag = new ListadoVentasFragment() ;
+                tag = Constantes.TAG_SINCRONIZACION;
+                break;
 
             case 21:
 
